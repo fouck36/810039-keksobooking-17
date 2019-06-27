@@ -1,7 +1,7 @@
 ﻿# Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Роман Вахрин](https://up.htmlacademy.ru/javascript/17/user/810039).
-* Наставник: `Евгений Щеколдин`.
+* Наставник: `[Евгений Щеколдин](https://htmlacademy.ru/profile/id861059)`.
 
 ---
 
