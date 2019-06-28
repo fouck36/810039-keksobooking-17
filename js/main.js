@@ -1,4 +1,4 @@
-'Use strict'
+'use strict';
 
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
@@ -21,13 +21,13 @@ var MapSetup = {
 
 var authors = 8;
 
-var getRandomNumber = function(min, max){
+var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
-var getRandomOffer = function(offers){
+var getRandomOffer = function (offers) {
   return offers[getRandomNumber(0, offers.length)];
-}
+};
 
 var generatePinsData = function () {
   var pins = [];
@@ -48,7 +48,7 @@ var generatePinsData = function () {
   }
 
   return pins;
-}
+};
 
 var renderPin = function (pin) {
   var pinElement = pinTemplate.cloneNode(true);
@@ -58,6 +58,7 @@ var renderPin = function (pin) {
   img.setAttribute('alt', 'Заголовок объявления');
   pinElement.style.left = pin.location.x + 'px';
   pinElement.style.top = pin.location.y + 'px';
+
 
   return pinElement;
 };
