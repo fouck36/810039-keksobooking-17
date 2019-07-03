@@ -1,11 +1,5 @@
 'use strict';
 
-var map = document.querySelector('.map');
-map.classList.remove('map--faded');
-
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-var similarListElement = map.querySelector('.map__pins');
-
 var TYPES_OF_OFFER = ['palace', 'flat', 'house', 'bungalo'];
 
 var MapSetup = {
@@ -20,6 +14,17 @@ var MapSetup = {
 };
 
 var authors = 8;
+
+var map = document.querySelector('.map');
+var adForm = document.querySelector('.ad-form');
+var mapFilters = map.querySelectorAll('.map__filter');
+var fieldsetsForm = document.querySelectorAll('fieldset');
+var mainPin = map.querySelector('.map__pin--main');
+var fieldPinAddress = document.querySelector('#address');
+var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var similarListElement = map.querySelector('.map__pins');
+
+
 
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -71,4 +76,42 @@ var renderPins = function (array) {
   similarListElement.appendChild(fragment);
 };
 
-renderPins(generatePinsData());
+var setPinAddressValue = function (width, height) {
+  var topMainPin = parseInt(mainPin.style.top, 10) + height;
+  var leftMainPin = parseInt(mainPin.style.left, 10) + width;
+
+  fieldPinAddress.value = leftMainPin + ', ' + topMainPin;
+};
+
+var setDisabled = function (array, isDisabled) {
+  for (var i = 0; i < array.length; i++) {
+    if (isDisabled) {
+      array[i].setAttribute('disabled', '');
+    } else {
+      array[i].removeAttribute('disabled', '');
+    }
+  }
+
+  return array;
+};
+
+var onActivatePage = function () {
+  map.classList.remove('map--faded');
+  adForm.classList.remove('ad-form--disabled');
+  setDisabled(mapFilters, false);
+  setDisabled(fieldsetsForm, false);
+  renderPins(generatePinsData());
+};
+
+mainPin.addEventListener('click', function (evt) {
+  evt.preventDefault();
+
+  if (map.classList.contains('map--faded')) {
+    onActivatePage();
+  }
+});
+
+setDisabled(mapFilters, true);
+setDisabled(fieldsetsForm, true);
+setPinAddressValue(0, 0);
+
