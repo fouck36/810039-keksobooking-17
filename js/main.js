@@ -1,6 +1,17 @@
 'use strict';
 
-var TYPES_OF_OFFER = ['palace', 'flat', 'house', 'bungalo'];
+var TYPES_OF_OFFER = [
+  'palace',
+  'flat',
+  'house',
+  'bungalo'];
+
+var MIN_PRICE_OF_OFFER = {
+  bungalo: 0,
+  flat: 1000,
+  house: 5000,
+  palace: 10000
+};
 
 var MapSetup = {
   width: {
@@ -24,6 +35,10 @@ var fieldPinAddress = document.querySelector('#address');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var similarListElement = map.querySelector('.map__pins');
 
+var types = adForm.querySelector('#type');
+var price = adForm.querySelector('#price');
+var timeIn = adForm.querySelector('#timein');
+var timeOut = adForm.querySelector('#timeout');
 
 
 var getRandomNumber = function (min, max) {
@@ -110,6 +125,20 @@ mainPin.addEventListener('click', function (evt) {
     onActivatePage();
   }
 });
+
+types.addEventListener('change', function () {
+  var valueType = types.value;
+  price.setAttribute('placeholder', MIN_PRICE_OF_OFFER[valueType]);
+  price.setAttribute('min', MIN_PRICE_OF_OFFER[valueType]);
+});
+
+var onTimeChange = function (evt) {
+  var select = evt.target === timeIn ? timeOut : timeIn;
+  select.value = evt.target.value;
+};
+
+timeIn.addEventListener('change', onTimeChange);
+timeOut.addEventListener('change', onTimeChange);
 
 setDisabled(mapFilters, true);
 setDisabled(fieldsetsForm, true);
